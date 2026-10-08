@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 19th Birthday Shrouk! ✨💖</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Sacramento&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        tailwind.config = {
+        theme: {
+        extend: {
+        colors: {
+        pink: {
+        50: '#fff1f2',
+        100: '#ffe4e6',
+        200: '#fecdd3',
+        300: '#fda4af',
+        400: '#fb7185',
+        500: '#f43f5e',
+        600: '#e11d48',
+        700: '#be123c',
+        },
+        girly: {
+        blush: '#FFF0F5',
+        rose: '#FFB6C1',
+        hotpink: '#FF69B4',
+        deeprose: '#FF1493',
+        gold: '#FFD700',
+        lavender: '#E6E6FA'
+        }
+        },
+        fontFamily: {
+        heading: ['Playfair Display', 'serif'],
+        script: ['Dancing Script', 'cursive'],
+        accent: ['Sacramento', 'cursive'],
+        sans: ['Montserrat', 'sans-serif'],
+        },
+        animation: {
+        'float': 'float 4s ease-in-out infinite',
+        'float-slow': 'float 7s ease-in-out infinite',
+        'pulse-glow': 'pulseGlow 2s infinite alternate',
+        'sparkle': 'sparkle 1.5s ease-in-out infinite alternate',
+        'bounce-soft': 'bounceSoft 2s infinite',
+        },
+        keyframes: {
+        float: {
+        '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+        '50%': { transform: 'translateY(-18px) rotate(3deg)' }
+        },
+        pulseGlow: {
+        '0%': { boxShadow: '0 0 15px rgba(255, 105, 180, 0.4), 0 0 30px rgba(255, 182, 193, 0.2)' },
+        '100%': { boxShadow: '0 0 30px rgba(255, 105, 180, 0.8), 0 0 50px rgba(255, 20, 147, 0.5)' }
+        },
+        sparkle: {
+        '0%': { opacity: '0.3', transform: 'scale(0.8)' },
+        '100%': { opacity: '1', transform: 'scale(1.2)' }
+        },
+        bounceSoft: {
+        '0%, 100%': { transform: 'translateY(0)' },
+        '50%': { transform: 'translateY(-10px)' }
+        }
+        }
+        }
+        }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 50%, #ffd1dc 100%);
+            overflow-x: hidden;
+            color: #4a3b4e;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #fff0f5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ffb6c1;
+            border-radius: 10px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #ff69b4;
+            }
+
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.12);
+        }
+
+        .glass-card-dark {
+            background: rgba(255, 240, 245, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 182, 193, 0.5);
+            box-shadow: 0 15px 35px rgba(219, 112, 147, 0.15);
+        }
+
+        /* Particle Canvas Overlay */
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Cake Styles */
+        .cake-container {
+            position: relative;
+            width: 220px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .cake-base {
+            position: absolute;
+            bottom: 0;
+            width: 220px;
+            height: 70px;
+            background: linear-gradient(to right, #f472b6, #ec4899, #db2777);
+            border-radius: 15px 15px 10px 10px;
+            box-shadow: 0 8px 0 #be185d;
+        }
+
+        .cake-middle {
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            width: 180px;
+            height: 60px;
+            background: linear-gradient(to right, #fbcfe8, #f472b6);
+            border-radius: 15px 15px 8px 8px;
+            box-shadow: 0 6px 0 #db2777;
+        }
+
+        .cake-top {
+            position: absolute;
+            bottom: 115px;
+            left: 40px;
+            width: 140px;
+            height: 50px;
+            background: linear-gradient(to right, #ffffff, #fbcfe8);
+            border-radius: 12px 12px 6px 6px;
+            box-shadow: 0 5px 0 #f472b6;
+        }
+
+        .frosting-drip {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 15px;
+            background: #fff;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .candle {
+            position: absolute;
+            bottom: 165px;
+            width: 12px;
+            height: 45px;
+            background: repeating-linear-gradient(45deg, #ff69b4, #ff69b4 5px, #fff 5px, #fff 10px);
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+        }
+
+        .candle-1 {
+            left: 60px;
+        }
+
+        .candle-2 {
+            left: 104px;
+        }
+
+        .candle-3 {
+            left: 148px;
+        }
+
+        .flame {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 20px;
+            background: radial-gradient(ellipse at bottom, #ffee55 0%, #ff9900 60%, rgba(255, 0, 0, 0) 100%);
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 0.6s infinite alternate;
+            box-shadow: 0 0 12px #ff9900, 0 0 20px #ffee55;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+            .flame.extinguished {
+                opacity: 0 !important;
+                transform: translateX(-50%) scale(0.1) !important;
+            }
+
+        @keyframes flicker {
+            0% {
+                transform: translateX(-50%) scale(1) rotate(-2deg);
+            }
+
+            100% {
+                transform: translateX(-50%) scale(1.1) rotate(2deg);
+            }
+        }
+
+        /* Polaroid Hover Effect */
+        .polaroid {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+            .polaroid:hover {
+                transform: translateY(-12px) rotate(0deg) scale(1.03) !important;
+                box-shadow: 0 20px 30px rgba(255, 105, 180, 0.25);
+                z-index: 20;
+            }
+
+        /* Ribbon Gift Box Animations */
+        .gift-lid {
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-origin: top left;
+        }
+
+        .gift-box.open .gift-lid {
+            transform: rotate(-110deg) translateY(-20px);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-pink-900 selection:bg-pink-300 selection:text-pink-900">
+
+    <canvas id="particleCanvas"></canvas>
+
+    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-4 py-3 sm:px-8">
+        <div class="max-w-6xl mx-auto glass-card rounded-full px-6 py-3 flex justify-between items-center shadow-lg">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">✨</span>
+                <span class="font-script text-2xl sm:text-3xl font-bold bg-gradient-to-r from-pink-500 to-rose-600 bg-clip-text text-transparent">
+                    Shrouk's 19th
+                </span>
+            </div>
+
+            <div class="flex items-center gap-3 sm:gap-6 text-sm font-semibold">
+                <a href="#hero" class="hidden sm:inline-block hover:text-pink-600 transition">Home</a>
+                <a href="#reasons" class="hidden sm:inline-block hover:text-pink-600 transition">19 Reasons</a>
+                <a href="#gallery" class="hidden sm:inline-block hover:text-pink-600 transition">Memories</a>
+                <a href="#cake" class="hidden sm:inline-block hover:text-pink-600 transition">Make a Wish</a>
+
+                <!-- Music Toggle Button -->
+                <button id="musicBtn" onclick="toggleAudio()" class="flex items-center gap-2 bg-gradient-to-r from-pink-400 to-rose-400 hover:from-pink-500 hover:to-rose-500 text-white px-4 py-2 rounded-full shadow-md hover:shadow-pink-300/50 transition transform hover:scale-105">
+                    <i id="musicIcon" class="fas fa-music animate-pulse"></i>
+                    <span id="musicText" class="text-xs sm:text-sm font-medium">Play Music</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-12 px-4 text-center overflow-hidden">
+
+        <!-- Floating Decorative Icons in Background -->
+        <div class="absolute top-20 left-10 text-4xl animate-float opacity-70">🌸</div>
+        <div class="absolute top-40 right-12 text-5xl animate-float-slow opacity-80" style="animation-delay: 1s;">👑</div>
+        <div class="absolute bottom-20 left-16 text-4xl animate-float opacity-60" style="animation-delay: 2s;">💖</div>
+        <div class="absolute bottom-32 right-20 text-5xl animate-float-slow opacity-75" style="animation-delay: 1.5s;">✨</div>
+
+        <div class="relative z-20 max-w-4xl mx-auto space-y-6">
+
+            <div class="inline-block glass-card px-6 py-2 rounded-full border border-pink-200 shadow-sm animate-bounce-soft">
+                <p class="text-xs sm:text-sm uppercase tracking-widest font-semibold text-rose-500 flex items-center gap-2">
+                    <i class="fas fa-sparkles text-pink-400"></i>
+                    Official Celebration Page • Oct 10 2026
+                    <i class="fas fa-sparkles text-pink-400"></i>
+                </p>
+            </div>
+
+            <h1 class="text-5xl sm:text-7xl md:text-8xl font-heading font-extrabold tracking-tight text-pink-900 drop-shadow-sm leading-tight">
+                Happy <span class="bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 bg-clip-text text-transparent font-script text-6xl sm:text-8xl md:text-9xl font-bold px-2">19th</span> Birthday,
+                <br>
+                <span class="relative inline-block mt-2">
+                    <span class="relative z-10 text-pink-700 font-heading italic">Shrouk!</span>
+                    <span class="absolute bottom-2 left-0 w-full h-4 bg-pink-200/60 rounded-full -z-10"></span>
+                </span>
+            </h1>
+
+            <p class="text-lg sm:text-xl md:text-2xl font-light text-pink-800 max-w-2xl mx-auto leading-relaxed">
+                To my absolute favorite human, my best friend, and the brightest ray of sunshine! May your 19th year be as iconic, gorgeous, and magical as you are. 👑✨
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-6">
+                <button onclick="triggerBirthdayBlast()" class="glass-card-dark text-pink-700 hover:text-pink-900 font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-pink-300/60 transition transform hover:-translate-y-1 flex items-center gap-3 border border-pink-300 text-lg">
+                    <i class="fas fa-gift text-pink-500 text-xl"></i>
+                    Celebrate Shrouk! 🎉
+                </button>
+
+                <a href="#wish" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-pink-400/50 transition transform hover:-translate-y-1 flex items-center gap-2 text-lg">
+                    <span>Send Love</span>
+                    <i class="fas fa-heart"></i>
+                </a>
+            </div>
+
+            <div class="pt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                <div class="glass-card p-4 rounded-2xl text-center transform hover:scale-105 transition">
+                    <span class="block text-3xl font-heading font-bold text-pink-600">19</span>
+                    <span class="text-xs uppercase font-medium tracking-wider text-pink-800">Years Fabulous</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl text-center transform hover:scale-105 transition">
+                    <span class="block text-3xl font-heading font-bold text-pink-600">228</span>
+                    <span class="text-xs uppercase font-medium tracking-wider text-pink-800">Months of Joy</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl text-center transform hover:scale-105 transition">
+                    <span class="block text-3xl font-heading font-bold text-pink-600">6,940</span>
+                    <span class="text-xs uppercase font-medium tracking-wider text-pink-800">Days of Magic</span>
+                </div>
+                <div class="glass-card p-4 rounded-2xl text-center transform hover:scale-105 transition">
+                    <span class="block text-3xl font-heading font-bold text-pink-600">∞</span>
+                    <span class="text-xs uppercase font-medium tracking-wider text-pink-800">Infinite Love</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cake" class="py-20 px-4 relative">
+        <div class="max-w-4xl mx-auto glass-card-dark rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden shadow-2xl border border-pink-200">
+
+            <div class="absolute -top-10 -left-10 w-40 h-40 bg-pink-300/30 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-rose-300/30 rounded-full blur-3xl"></div>
+
+            <span class="text-xs font-bold uppercase tracking-widest text-pink-500 bg-pink-100 px-4 py-1.5 rounded-full inline-block mb-3">
+                Interactive Birthday Tradition 🎂
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-pink-900 mb-4">
+                Make a Wish & Blow Out the Candles!
+            </h2>
+            <p class="text-pink-700 max-w-lg mx-auto mb-8 text-sm sm:text-base">
+                Click on the candle flames to blow them out, or click the magic button to extinguish all three and unlock Shrouk's birthday fireworks display!
+            </p>
+
+            <!-- 3D/CSS Cake -->
+            <div class="my-8 py-6 relative">
+                <div class="cake-container">
+                    <!-- Candles -->
+                    <div class="candle candle-1" onclick="extinguishCandle(1)">
+                        <div id="flame-1" class="flame"></div>
+                    </div>
+                    <div class="candle candle-2" onclick="extinguishCandle(2)">
+                        <div id="flame-2" class="flame"></div>
+                    </div>
+                    <div class="candle candle-3" onclick="extinguishCandle(3)">
+                        <div id="flame-3" class="flame"></div>
+                    </div>
+
+                    <!-- Cake Layers -->
+                    <div class="cake-top">
+                        <div class="frosting-drip"></div>
+                    </div>
+                    <div class="cake-middle">
+                        <div class="frosting-drip"></div>
+                    </div>
+                    <div class="cake-base">
+                        <div class="frosting-drip"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+                <button onclick="blowAllCandles()" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-full shadow-md hover:shadow-pink-400/50 transition transform hover:scale-105 flex items-center gap-2">
+                    <i class="fas fa-wind"></i>
+                    Blow Out All Candles 💨
+                </button>
+                <button onclick="relightCandles()" class="glass-card hover:bg-white text-pink-700 font-semibold px-6 py-3.5 rounded-full transition text-sm">
+                    <i class="fas fa-redo-alt mr-1"></i> Relight Candles
+                </button>
+            </div>
+
+            <!-- Wish Revealed Message Box -->
+            <div id="wishRevealedMsg" class="hidden mt-8 p-6 bg-pink-100/80 rounded-2xl border border-pink-300 animate-fade-in">
+                <h3 class="text-2xl font-script font-bold text-rose-600 mb-2">🎉 Your Birthday Wish is Sent to the Stars! 🎉</h3>
+                <p class="text-pink-800 font-medium">May all your dreams, laughter, and goals shine brighter than ever in your 19th chapter, Shrouk! 💕</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="reasons" class="py-20 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-xs font-bold uppercase tracking-widest text-pink-500 bg-white/70 px-4 py-1.5 rounded-full inline-block mb-3 shadow-sm">
+                Dedicated To Shrouk 💖
+            </span>
+            <h2 class="text-4xl sm:text-5xl font-heading font-extrabold text-pink-900">
+                19 Reasons Why You Are Unforgettable
+            </h2>
+            <p class="text-pink-700 mt-3 text-base sm:text-lg max-w-2xl mx-auto font-light">
+                Here are 19 special things that make you the most remarkable, kindest, and funniest best friend in the world!
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="reasonsGrid">
+            <!-- JavaScript dynamically inserts cards here -->
+        </div>
+    </section>
+
+    <section id="gallery" class="py-20 px-4 bg-gradient-to-b from-transparent via-pink-100/50 to-transparent">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-pink-500 bg-white/70 px-4 py-1.5 rounded-full inline-block mb-3 shadow-sm">
+                    Precious Moments 📸
+                </span>
+                <h2 class="text-4xl sm:text-5xl font-heading font-extrabold text-pink-900">
+                    Shrouk's Memory Snapshot Gallery
+                </h2>
+                <p class="text-pink-700 mt-2">Tap or hover over the polaroids to feel the magic!</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+
+                <!-- Polaroid 1 -->
+                <div class="polaroid bg-white p-4 rounded-xl shadow-xl transform -rotate-3 hover:rotate-0 transition">
+                    <div class="relative overflow-hidden rounded-lg aspect-square bg-pink-100 flex items-center justify-center group">
+                        <img src="images/shrouk3 Image 2026-10-08 at 9.09.08 PM.jpeg" alt="Best Friends" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-pink-900/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-3xl">
+                            💖
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <p class="font-script text-2xl text-pink-800">Unstoppable Duo ✨</p>
+                        <p class="text-xs text-pink-400 mt-1 font-medium">Forever making the best memories</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 2 -->
+                <div class="polaroid bg-white p-4 rounded-xl shadow-xl transform rotate-2 hover:rotate-0 transition">
+                    <div class="relative overflow-hidden rounded-lg aspect-square bg-pink-100 flex items-center justify-center group">
+                        <img src="images/shrouk2 Image 2026-10-08 at 9.09.08 PM.jpeg" alt="Laughing Together" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-pink-900/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-3xl">
+                            🌸
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <p class="font-script text-2xl text-pink-800">Endless Laughter 😂</p>
+                        <p class="text-xs text-pink-400 mt-1 font-medium">Inside jokes that never get old</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 3 -->
+                <div class="polaroid bg-white p-4 rounded-xl shadow-xl transform -rotate-2 hover:rotate-0 transition">
+                    <div class="relative overflow-hidden rounded-lg aspect-square bg-pink-100 flex items-center justify-center group">
+                        <img src="images/shrouk1 Image 2026-10-08 at 9.09.07 PM.jpeg" alt="Chic Girl" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-pink-900/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-3xl">
+                            👑
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <p class="font-script text-2xl text-pink-800">Birthday Queen 👑</p>
+                        <p class="text-xs text-pink-400 mt-1 font-medium">Turning 19 in high style</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 4 -->
+                <div class="polaroid bg-white p-4 rounded-xl shadow-xl transform rotate-3 hover:rotate-0 transition">
+                    <div class="relative overflow-hidden rounded-lg aspect-square bg-pink-100 flex items-center justify-center group">
+                        <img src="images/shrouk5 Image 2026-10-08 at 9.09.08 PM.jpeg" alt="Celebration" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-pink-900/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-3xl">
+                            🎈
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <p class="font-script text-2xl text-pink-800">Party Vibe 🥳</p>
+                        <p class="text-xs text-pink-400 mt-1 font-medium">Glitter, fun, & good times</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 5 -->
+                <div class="polaroid bg-white p-4 rounded-xl shadow-xl transform -rotate-1 hover:rotate-0 transition">
+                    <div class="relative overflow-hidden rounded-lg aspect-square bg-pink-100 flex items-center justify-center group">
+                        <img src="images/shrouk6 Image 2026-10-08 at 9.09.08 PM.jpeg" alt="Sweet Cake" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-pink-900/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-3xl">
+                            🍰
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <p class="font-script text-2xl text-pink-800">Sweetest Moments 🎂</p>
+                        <p class="text-xs text-pink-400 mt-1 font-medium">Life is sweet with you around</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid 6 -->
+                <div class="polaroid bg-white p-4 rounded-xl shadow-xl transform rotate-2 hover:rotate-0 transition">
+                    <div class="relative overflow-hidden rounded-lg aspect-square bg-pink-100 flex items-center justify-center group">
+                        <img src="images/shrouk4 Image 2026-10-08 at 9.09.08 PM.jpeg" alt="Sunset Vibes" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-pink-900/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-3xl">
+                            🌷
+                        </div>
+                    </div>
+                    <div class="pt-4 text-center">
+                        <p class="font-script text-2xl text-pink-800">Forever & Always 👭</p>
+                        <p class="text-xs text-pink-400 mt-1 font-medium">Best friends for life</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="surprise" class="py-20 px-4">
+        <div class="max-w-3xl mx-auto glass-card-dark rounded-3xl p-8 sm:p-12 text-center relative shadow-2xl border border-pink-200">
+            <span class="text-xs font-bold uppercase tracking-widest text-pink-500 bg-pink-100 px-4 py-1.5 rounded-full inline-block mb-3">
+                Tap To Unbox 🎁
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-heading font-extrabold text-pink-900 mb-2">
+                A Special Birthday Gift For Shrouk
+            </h2>
+            <p class="text-pink-700 text-sm sm:text-base mb-8">
+                Click the gift box below to open your virtual surprise note!
+            </p>
+
+            <!-- Gift Box Animation Container -->
+            <div id="giftBox" class="gift-box cursor-pointer inline-block my-4 transform hover:scale-105 transition" onclick="openGift()">
+                <div class="relative w-40 h-40 mx-auto">
+                    <!-- Box Lid -->
+                    <div class="gift-lid absolute top-0 left-0 w-full h-10 bg-rose-500 rounded-md z-20 shadow-md flex items-center justify-center">
+                        <div class="w-6 h-full bg-yellow-300"></div>
+                        <div class="absolute -top-6 text-3xl">🎀</div>
+                    </div>
+                    <!-- Box Body -->
+                    <div class="absolute bottom-0 left-2 w-36 h-32 bg-pink-500 rounded-b-xl shadow-xl flex justify-center z-10 overflow-hidden">
+                        <div class="w-6 h-full bg-yellow-300"></div>
+                    </div>
+                </div>
+                <p class="text-xs font-semibold text-rose-500 mt-3 animate-pulse">Click to open!</p>
+            </div>
+
+            <!-- Revealed Note (Hidden by default) -->
+            <div id="giftContent" class="hidden mt-8 p-6 sm:p-8 bg-white/90 rounded-2xl shadow-inner border border-pink-200 text-left space-y-4 animate-fade-in">
+                <div class="flex items-center justify-between border-b border-pink-100 pb-3">
+                    <span class="font-script text-2xl font-bold text-rose-600">Dearest Shrouk 💕</span>
+                    <span class="text-xs text-pink-400 font-semibold">19th Birthday Edition</span>
+                </div>
+                <p class="text-pink-900 text-sm sm:text-base leading-relaxed">
+                    Happy 19th Birthday to my favorite girl in the entire universe! 🌸 Having you as my best friend is the greatest gift. You bring so much laughter, warmth, and sparkle into my life everyday.
+                </p>
+                <p class="text-pink-900 text-sm sm:text-base leading-relaxed">
+                    shukran enk konti aktr had we2f gnbi fkoul haga aynn yakoun helwa wala wehsha,aktr had bikhaf alia wa daimn albo alia wa ayezz dimn elahsn liaa,wahshni aii haga bena ayam elmadrsa wa eldrous lama kont bashoufk koul youm mkontshh atkhail en elayam de ht3de bsor3a keda,bd3ee daimn en yarb tfdle gnbe wa nfdl fdhr b3d tool el3omr,yarab tkone ang7 wahda daiman wa tkoune ashtr doctor feldonia koulha wa yarab nfdl nng7 sawa wa nshg3 b3d daiman ala elahsn,yarab ana wenti wa jana nfdl ekhwat lb2eet el3omr wa tfdlo gnbe wa fe haiate ala tool ashan ana f3ln m2drsh a3iish mngherko,ana bahebk awe yshrouk wallahe wa asfa law kont z3lt aw grhtk blghlt fyoum mn elayam love you shoshte 💕
+                </p>
+                <div class="pt-4 flex items-center justify-between">
+                    <p class="font-script text-2xl text-pink-600 font-bold">Love you endlessly! ❤️</p>
+                    <span class="text-2xl">💐👑✨</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+   
+
+    <footer class="py-8 text-center text-pink-700 text-xs sm:text-sm border-t border-pink-200/60 bg-white/30 backdrop-blur-sm">
+        <p class="font-medium">Crafted with infinite love for <span class="font-bold text-rose-600">Shrouk's 19th Birthday</span> ✨</p>
+        <p class="text-pink-400 mt-1">Forever Best Friends • Celebrating 19 Fabulous Years</p>
+    </footer>
+
+    <script>
+        // 1. Data for 19 Reasons Why Shorouk is Amazing
+        const reasonsList = [
+        { icon: "💖", title: "Pure Heart", desc: "You possess the kindest and most compassionate soul." },
+        { icon: "👑", title: "Queen Energy", desc: "You bring confidence, grace, and style everywhere." },
+        { icon: "😂", title: "Funniest Laughs", desc: "You know exactly how to make me laugh until my stomach hurts." },
+        { icon: "🩺", title: "The Doctor", desc: "Not only doctor in real life but also doctor of my heart." },
+        { icon: "🎀", title: "Best Fashion Sense", desc: "Always dressed so cute, stylish, and chic!" },
+        { icon: "✨", title: "Unmatched Vibe", desc: "Being around you is always full of positive energy." },
+        { icon: "🤝", title: "Always Loyal", desc: "The truest friend anyone could ever ask for." },
+        { icon: "🎧", title: "Great Music Taste", desc: "Our shared playlists and vibe sessions are unmatched." },
+        { icon: "🌟", title: "Dream Chaser", desc: "You work hard and inspire everyone around you." },
+        { icon: "🍰", title: "Sweetest Spirit", desc: "You always care deeply about the people you love." },
+        { icon: "☀️", title: "Sunshine Energy", desc: "Even on cloudy days, you bring warmth and light." },
+        { icon: "📸", title: "Picture Perfect", desc: "Every single photo of you is model material!" },
+        { icon: "💬", title: "Best Listener", desc: "Thank you for always listening and understanding me." },
+        { icon: "🎉", title: "Life of the Party", desc: "Celebrations are never complete without you!" },
+        { icon: "🌷", title: "Genuinely Unique", desc: "There is literally no one else like you in the world." },
+        { icon: "🎁", title: "Generous Soul", desc: "You give so much love and joy to others." },
+        { icon: "🔮", title: "Bright Future", desc: "Age 19 is going to bring you huge success!" },
+        { icon: "💪", title: "Strong & Brave", desc: "You handle every challenge with strength and grace." },
+        { icon: "👭", title: "My Forever Bestie", desc: "Because life is 100x better with you as my best friend!" }
+        ];
+
+        // Render 19 Reasons Dynamic Grid
+        const reasonsGrid = document.getElementById('reasonsGrid');
+        reasonsList.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'glass-card p-6 rounded-2xl border border-pink-200/80 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2';
+        card.innerHTML = `
+        <div class="flex items-center gap-3 mb-3">
+        <span class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-xl shadow-inner">${item.icon}</span>
+        <div>
+        <span class="text-xs font-bold text-pink-400 uppercase tracking-widest">Reason #${index + 1}</span>
+        <h4 class="font-heading font-bold text-pink-900 text-lg">${item.title}</h4>
+        </div>
+        </div>
+        <p class="text-pink-700 text-sm font-light leading-relaxed">${item.desc}</p>
+        `;
+        reasonsGrid.appendChild(card);
+        });
+
+        // 2. Interactive Floating Particle Background System
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class FloatingParticle {
+        constructor() {
+        this.reset();
+        }
+        reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * 100;
+        this.size = Math.random() * 12 + 8;
+        this.speedY = Math.random() * 1.2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.opacity = Math.random() * 0.6 + 0.2;
+        this.type = Math.floor(Math.random() * 3); // 0: Heart, 1: Sparkle, 2: Petal
+        }
+        update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        if (this.y < -20) this.reset();
+        }
+        draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.font = `${this.size}px serif`;
+        const symbols = ['💖', '✨', '🌸', '💕'];
+        ctx.fillText(symbols[this.type], this.x, this.y);
+        ctx.restore();
+        }
+        }
+
+        for (let i = 0; i < 35; i++) {
+        particles.push(new FloatingParticle());
+        }
+
+        function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+        p.update();
+        p.draw();
+        });
+        requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // 3. Confetti Cannon Trigger
+        function triggerBirthdayBlast() {
+        confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff69b4', '#ffb6c1', '#ffd700', '#ff1493', '#ffffff']
+        });
+        }
+
+        // 4. Interactive Candle Extinguish & Fireworks Logic
+        let extinguishedCount = 0;
+
+        function extinguishCandle(index) {
+        const flame = document.getElementById(`flame-${index}`);
+        if (!flame.classList.contains('extinguished')) {
+        flame.classList.add('extinguished');
+        extinguishedCount++;
+
+        // Trigger localized mini confetti
+        confetti({
+        particleCount: 35,
+        spread: 40,
+        origin: { y: 0.5 },
+        colors: ['#ffb6c1', '#ffd700']
+        });
+
+        checkAllCandles();
+        }
+        }
+
+        function blowAllCandles() {
+        for (let i = 1; i <= 3; i++) {
+        extinguishCandle(i);
+        }
+        }
+
+        function relightCandles() {
+        for (let i = 1; i <= 3; i++) {
+        document.getElementById(`flame-${i}`).classList.remove('extinguished');
+        }
+        extinguishedCount = 0;
+        document.getElementById('wishRevealedMsg').classList.add('hidden');
+        }
+
+        function checkAllCandles() {
+        if (extinguishedCount === 3) {
+        document.getElementById('wishRevealedMsg').classList.remove('hidden');
+        // Grand celebration fireworks effect
+        var duration = 3 * 1000;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        var interval = setInterval(function() {
+        var timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) {
+        return clearInterval(interval);
+        }
+        var particleCount = 50 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+        }, 250);
+        }
+        }
+
+        function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+        }
+
+        // 5. Gift Unboxing Logic
+        function openGift() {
+        const giftBox = document.getElementById('giftBox');
+        const giftContent = document.getElementById('giftContent');
+        giftBox.classList.add('open');
+        setTimeout(() => {
+        giftContent.classList.remove('hidden');
+        triggerBirthdayBlast();
+        }, 400);
+        }
+
+        // 6. Interactive Birthday Wish Note Submission
+        function submitWish(e) {
+        e.preventDefault();
+        const name = document.getElementById('senderName').value;
+        const msg = document.getElementById('senderMsg').value;
+
+        const msgCard = document.createElement('div');
+        msgCard.className = 'p-4 bg-white/90 rounded-2xl border border-pink-200 shadow-sm animate-fade-in text-left';
+        msgCard.innerHTML = `
+        <div class="flex items-center justify-between mb-1">
+        <span class="font-bold text-pink-900 text-sm">${escapeHtml(name)}</span>
+        <span class="text-xs text-pink-400">Just Now 💖</span>
+        </div>
+        <p class="text-pink-800 text-sm">${escapeHtml(msg)}</p>
+        `;
+
+        document.getElementById('messagesList').prepend(msgCard);
+        document.getElementById('wishForm').reset();
+        triggerBirthdayBlast();
+        }
+
+        function escapeHtml(text) {
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // 7. Web Audio Synthesizer (Soft Playful Chime Music Player)
+        let audioCtx = null;
+        let isPlaying = false;
+        let musicTimer = null;
+
+        const melodyNotes = [
+        261.63, 261.63, 293.66, 261.63, 349.23, 329.63, // Happy Birthday to You
+        261.63, 261.63, 293.66, 261.63, 392.00, 349.23, // Happy Birthday to You
+        261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66, // Happy Birthday Dear Shorouk
+        466.16, 466.16, 440.00, 349.23, 392.00, 349.23  // Happy Birthday to You
+        ];
+        let noteIndex = 0;
+
+        function playNote(freq) {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.6);
+        }
+
+        function toggleAudio() {
+        if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        const musicText = document.getElementById('musicText');
+        const musicIcon = document.getElementById('musicIcon');
+
+        if (!isPlaying) {
+        isPlaying = true;
+        musicText.innerText = "Pause Music";
+        musicIcon.className = "fas fa-pause";
+
+        musicTimer = setInterval(() => {
+        playNote(melodyNotes[noteIndex]);
+        noteIndex = (noteIndex + 1) % melodyNotes.length;
+        }, 400);
+        } else {
+        isPlaying = false;
+        musicText.innerText = "Play Music";
+        musicIcon.className = "fas fa-music animate-pulse";
+        clearInterval(musicTimer);
+        }
+        }
+    </script>
+</body>
+</html>
